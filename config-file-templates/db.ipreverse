@@ -1,0 +1,23 @@
+$TTL    86400
+@       IN      SOA     <dns-master-server-name>.<domain-LAN>. admin.<domain-LAN>. (
+                  1     ; Serial
+              21600     ; Refresh after 6 hours
+               3600     ; Retry aftew 1 hour
+             604800     ; Expire after 1 week
+             604800     ; Minimum TTL of 1 day
+)
+
+; Name Servers - NS records
+; You must add the 'NS' records according to the number of DNS Servers deployed 
+    IN      NS      <dns-master-server-name>.
+    IN      NS      <dns-slave-server-name>. 
+
+; Name Servers - PTR records
+; You must add the 'PTR' records according to the number of hosts set in the forward file zone
+; You include the DNS Servers 
+<last-IP-segment>    IN      PTR      <dns-master-server-name>.
+<last-IP-segment>    IN      PTR      <dns-slave-server-name>.
+
+<last-IP-segment>    IN      PTR      <hosname0>.<domain-LAN>.
+<last-IP-segment>    IN      PTR      <hosname1>.<domain-LAN>.
+<last-IP-segment>    IN      PTR      <hosname2>.<domain-LAN>.
