@@ -1,6 +1,6 @@
 ---
 - name: Start named service
-  systemctl:
+  service:
     name: named 
     state: start 
     enabled: yes 
