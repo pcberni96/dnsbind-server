@@ -1,0 +1,13 @@
+---
+- name: Start named service
+  systemctl:
+    name: named 
+    state: start 
+    enabled: yes 
+
+- name: Add port to firewall
+  firewalld:
+    service: dns
+    permanent: yes 
+    state: enabled 
+    zone: public
