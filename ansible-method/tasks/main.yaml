@@ -1,3 +1,11 @@
 ---
-import_tasks: prerequisites.yaml
-import_tasks: config_named.yaml
+- hosts: all
+  vars_files:
+    - named_vars.yaml
+  
+  tasks:
+  - name: Prerequisites
+    import_tasks: prerequisites.yaml
+  
+  - name: Config named.service
+    import_tasks: config_named.yaml
