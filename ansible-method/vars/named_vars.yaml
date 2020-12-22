@@ -1,0 +1,22 @@
+---
+lan:
+  basedomain: "your_basedomain"
+  domain: "your_domain"
+  ip: "your_lanip"
+  preffix: "your_lanpreffix"
+    
+dnsmaster:
+  name: "your_dnsmaster_name"
+  ip: "your_dnsmaster_ip"
+
+dnsforwarders:
+  - name: "your_dnsforwarderN_name"
+    ip: "your_dnsforwarderN_ip"
+
+slaves:
+  - name: "your_dnsslaveN_name"
+    ip: "your_dnsslaveN_ip"
+
+hosts:
+  - name: "your_hostN_name"
+    ip: "your_hostN_ip"
