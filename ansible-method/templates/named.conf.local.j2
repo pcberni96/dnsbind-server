@@ -1,0 +1,13 @@
+###### Forward Zone ###################
+zone "{{ lan.domain }}" IN {
+    type master;
+    file "db.{{ lan.domain }}";
+    allow-update { none };
+};
+
+###### Backward Zone #################
+zone "{{ lan.ip.split('.')[2] }}.{{ lan.ip.split('.')[1] }}.{{ lan.ip.split('.')[0] }}.in-addr.arpa" IN {
+    type master;
+    file "db.{{ lan.ip.split('.')[2] }}.{{ lan.ip.split('.')[1] }}.{{ lan.ip.split('.')[0] }}";
+    allow-update { none };
+};
