@@ -1,0 +1,17 @@
+#######################################################
+This a template of the file named.conf.local
+######################################################
+
+###### Forward Zone ###################
+zone "<domain-LAN>" IN {
+    type master;
+    file "db.<domain-LAN>";
+    allow-update { none };
+};
+
+###### Backward Zone #################
+zone "<third-octect-ip>.<second-octect-ip>.<first-octect-ip>.in-addr.arpa" IN {
+    type master;
+    file "db.<first-octect-ip>.<second-octect-ip>.<third-octect-ip>";
+    allow-update { none };
+};
