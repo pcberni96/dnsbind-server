@@ -1,0 +1,32 @@
+$TTL    86400
+@       IN      SOA     {{ dnsmaster.name }}.{{ lan.basedomain }}.{{ lan.domain }}. admin.{{ lan.basedomain }}.{{ lan.domain }}. (
+                  1     ; Serial
+              21600     ; Refresh after 6 hours
+               3600     ; Retry aftew 1 hour
+             604800     ; Expire after 1 week
+             604800     ; Minimum TTL of 1 day
+)
+
+; Name Servers - NS records
+; You must add the 'NS' records according to the number of DNS Servers deployed 
+    IN      NS      {{ dnsmaster.name }}.
+{% if slaves is defined %}
+{% for s in slaves %}
+    IN      NS      {{ s.name }}.
+{% end for %}
+{% end if  %}
+; Name servers - A records
+; You must add the 'A' records according to the number of hosts that will be assigned a resolution name
+{{ dnsmaster.name }}     IN    A   {{ dnsmaster.ip }}
+
+{% if slaves is defined %}
+{% for s in slaves %}
+{{ s.name }}     IN    A   {{ s.ip }}
+{% end for %}
+{% end if  %}
+
+{% if hosts is defined %} 
+{% for h in hosts %}
+{{ h.name }}     IN    A   {{ h.ip }}
+{% end for %}
+{% end if %}
