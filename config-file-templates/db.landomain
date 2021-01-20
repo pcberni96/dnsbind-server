@@ -16,6 +16,10 @@ $TTL    86400
 ; You must add the 'MX' records according to the number of Mail Servers deployed
     IN      NS      <preference-value>  <mail-server-name>.
 
+; DNS Servers - A records 
+<dns-master-server-name>  IN  A <ip-dns-master>
+<dns-slave-server-name> IN  A <ip-dns-slave>
+
 ; Name servers - A records
 ; You must add the 'A' records according to the number of hosts that will be assigned a resolution name
 <host0>     IN    A   <ip-address>
