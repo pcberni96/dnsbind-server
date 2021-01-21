@@ -1,27 +1,22 @@
 ---
-- name: Download Packages
-  yum:
+- yum:
     name:
       - bind 
       - bind-utils
     state: latest
 
-- name: Copy File named.conf
-  template:
+- template:
     src: ../templates/named.conf.j2
     dest: /etc/named.conf
 
-- name: Copy File named.conf.local
-  template:
+- template:
     src: ../templates/named.conf.local.j2
     dest: /etc/named.conf.local
-
-- name: Copy File Backward Zone
-  template:
+    
+- template:
     src: ../templates/db.domain.j2
     dest: /var/named/db.{{ lan.domain }}
-
-- name: Copy File Forward Zone
-  template:
+    
+- template:
     src: ../templates/db.ipreverse.j2 
     dest: /var/named/db.{{ lan.ip.split('.')[2] }}.{{ lan.ip.split('.')[1] }}.{{ lan.ip.split('.')[0] }}
