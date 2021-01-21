@@ -11,7 +11,7 @@
 
 options {
 	listen-on port 53 { 127.0.0.1; {{ dnsmaster.ip }}; };
-#	listen-on-v6 port 53 { ::1; }; //comment this line
+#	listen-on-v6 port 53 { ::1; };
 	directory 	"/var/named";
 	dump-file 	"/var/named/data/cache_dump.db";
 	statistics-file "/var/named/data/named_stats.txt";
@@ -19,11 +19,11 @@ options {
 	recursing-file  "/var/named/data/named.recursing";
 	secroots-file   "/var/named/data/named.secroots";
 	allow-query     { localhost; {{ lan.ip }}/{{ lan.preffix }}; };
-{% if slaves is defined %}
-{% for s in slaves %}
-allow-transfer  { localhost; {{ s.ip }} };
-{% end if %}
-{% end for %}
+	{% if slaves is defined %}
+	{% for s in slaves %}
+	allow-transfer  { localhost; {{ s.ip }} };
+	{% endif %}
+	{% endfor %}
 	/* 
 	 - If you are building an AUTHORITATIVE DNS server, do NOT enable recursion.
 	 - If you are building a RECURSIVE (caching) DNS server, you need to enable 
@@ -37,9 +37,9 @@ allow-transfer  { localhost; {{ s.ip }} };
 	recursion yes;
 	
 	forwarders {
-  // This section, you set DNS Servers which your DNS Server will query
   		{% for f in dnsforwarders %}
                 {{ f.ip }};
+		{% endfor %}
         };
         
 	dnssec-enable yes;
@@ -68,4 +68,4 @@ zone "." IN {
 
 include "/etc/named.rfc1912.zones";
 include "/etc/named.root.key";
-include "/path/named.conf.local";
+include "/etc/named.conf.local";
