@@ -1,5 +1,5 @@
 $TTL    86400
-@       IN      SOA     {{ dnsmaster.name }}.{{ lan.basedomain }}.{{ lan.domain }}. admin.{{ lan.basedomain }}.{{ lan.domain }}. (
+@       IN      SOA     {{ dnsmaster.name }}.{{ lan.domain }}. admin.{{ lan.domain }}. (
                   1     ; Serial
               21600     ; Refresh after 6 hours
                3600     ; Retry aftew 1 hour
@@ -14,8 +14,8 @@ $TTL    86400
 {% if slaves is defined %}
 {% for s in slaves %}
     IN      NS      {{ s.name }}. 
-{% end for %}
-{% end if %}
+{% endfor %}
+{% endif %}
 ; Name Servers - PTR records
 ; You must add the 'PTR' records according to the number of hosts set in the forward file zone
 ; You include the DNS Servers 
@@ -24,11 +24,11 @@ $TTL    86400
 {% if slaves is defined %}
 {% for s in slaves %}
 {{ s.ip.split('.')[3] }}         IN      PTR      {{ s.name }}.
-{% end for %}
-{% end if %}
+{% endfor %}
+{% endif %}
 
 {% if hosts is defined %}
 {% for h in hosts %}
-{{ h.ip.split('.')[3] }}    IN      PTR      {{ s.name }}.{{ basedomain }}.{{ domain }}.
-{% end for %}
-{% end if %}
+{{ h.ip.split('.')[3] }}    IN      PTR      {{ s.name }}.{{ lan.domain }}.
+{% endfor %}
+{% endif %}
