@@ -1,7 +1,7 @@
 ---
 - hosts: all
   vars_files:
-    - named_vars.yaml
+    - ../vars/named_vars.yaml
   
   tasks:
   - name: Prerequisites
