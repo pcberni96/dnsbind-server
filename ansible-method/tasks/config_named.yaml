@@ -1,12 +1,10 @@
 ---
-- name: Start named service
-  service:
+- service:
     name: named 
     state: start 
     enabled: yes 
-
-- name: Add port to firewall
-  firewalld:
+    
+- firewalld:
     service: dns
     permanent: yes 
     state: enabled 
